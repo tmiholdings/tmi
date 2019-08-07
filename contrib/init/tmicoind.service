@@ -1,0 +1,22 @@
+[Unit]
+Description=TMIcoin's distributed currency daemon
+After=network.target
+
+[Service]
+User=tmicoin
+Group=tmicoin
+
+Type=forking
+PIDFile=/var/lib/tmicoind/tmicoind.pid
+ExecStart=/usr/bin/tmicoind -daemon -pid=/var/lib/tmicoind/tmicoind.pid \
+-conf=/etc/tmicoin/tmicoincore.conf -datadir=/var/lib/tmicoind -disablewallet
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

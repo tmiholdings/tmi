@@ -1,0 +1,92 @@
+#!/sbin/runscript
+
+# backward compatibility for existing gentoo layout 
+#
+if [ -d "/var/lib/tmicoin/.tmicoin" ]; then
+	TMICOIND_DEFAULT_DATADIR="/var/lib/tmicoin/.tmicoin"
+else
+	TMICOIND_DEFAULT_DATADIR="/var/lib/tmicoind"
+fi
+
+TMICOIND_CONFIGFILE=${TMICOIND_CONFIGFILE:-/etc/tmicoin/tmicoincore.conf}
+TMICOIND_PIDDIR=${TMICOIND_PIDDIR:-/var/run/tmicoind}
+TMICOIND_PIDFILE=${TMICOIND_PIDFILE:-${TMICOIND_PIDDIR}/tmicoind.pid}
+TMICOIND_DATADIR=${TMICOIND_DATADIR:-${TMICOIND_DEFAULT_DATADIR}}
+TMICOIND_USER=${TMICOIND_USER:-${TMICOIN_USER:-tmicoin}}
+TMICOIND_GROUP=${TMICOIND_GROUP:-tmicoin}
+TMICOIND_BIN=${TMICOIND_BIN:-/usr/bin/tmicoind}
+TMICOIND_NICE=${TMICOIND_NICE:-${NICELEVEL:-0}}
+TMICOIND_OPTS="${TMICOIND_OPTS:-${TMICOIN_OPTS}}"
+
+name="TMIcoin Core Daemon"
+description="TMIcoin cryptocurrency P2P network daemon"
+
+command="/usr/bin/tmicoind"
+command_args="-pid=\"${TMICOIND_PIDFILE}\" \
+		-conf=\"${TMICOIND_CONFIGFILE}\" \
+		-datadir=\"${TMICOIND_DATADIR}\" \
+		-daemon \
+		${TMICOIND_OPTS}"
+
+required_files="${TMICOIND_CONFIGFILE}"
+start_stop_daemon_args="-u ${TMICOIND_USER} \
+			-N ${TMICOIND_NICE} -w 2000"
+pidfile="${TMICOIND_PIDFILE}"
+
+# The retry schedule to use when stopping the daemon. Could be either
+# a timeout in seconds or multiple signal/timeout pairs (like
+# "SIGKILL/180 SIGTERM/300")
+retry="${TMICOIND_SIGTERM_TIMEOUT}"
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${TMICOIND_USER}:${TMICOIND_GROUP}" \
+	"${TMICOIND_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${TMICOIND_USER}:${TMICOIND_GROUP}" \
+	"${TMICOIND_PIDDIR}"
+
+	checkpath -f \
+	-o ${TMICOIND_USER}:${TMICOIND_GROUP} \
+	-m 0660 \
+	${TMICOIND_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${TMICOIND_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run tmicoind."
+		eerror "The setting must appear in ${TMICOIND_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following "
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"TMIcoin Core Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}

@@ -1,0 +1,8 @@
+/usr/bin/tmicoin-cli		--	gen_context(system_u:object_r:tmicoin_exec_t,s0)
+/usr/sbin/tmicoind		--	gen_context(system_u:object_r:tmicoin_exec_t,s0)
+/usr/lib(64)?/tmicoin/tmicoind		--	gen_context(system_u:object_r:tmicoin_exec_t,s0)
+
+/etc/tmicoin(/.*)?		gen_context(system_u:object_r:tmicoin_conf_t,s0)
+/var/lib/tmicoin(/.*)?		gen_context(system_u:object_r:tmicoin_var_lib_t,s0)
+
+(/var)?/run/tmicoind(/.*)?   gen_context(system_u:object_r:tmicoin_var_run_t,s0)

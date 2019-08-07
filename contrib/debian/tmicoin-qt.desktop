@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=TMIcoin Core
+Comment=Connect to the TMIcoin Core P2P Network
+Comment[de]=Verbinde mit dem TMIcoin peer-to-peer Netzwerk
+Comment[fr]=TMIcoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=TMIcoin, eşten eşe kriptografik sanal para birimi
+Exec=tmicoin-qt %u
+Terminal=false
+Type=Application
+Icon=tmicoin128
+MimeType=x-scheme-handler/tmicoincore;
+Categories=Office;Finance;

@@ -1,0 +1,6 @@
+usr/local/bin/tmicoin-qt usr/bin
+share/pixmaps/tmicoin32.xpm usr/share/pixmaps
+share/pixmaps/tmicoin16.xpm usr/share/pixmaps
+share/pixmaps/tmicoin128.png usr/share/pixmaps
+debian/tmicoin-qt.desktop usr/share/applications
+debian/tmicoin-qt.protocol usr/share/kde4/services/

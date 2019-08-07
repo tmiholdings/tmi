@@ -1,0 +1,33 @@
+# /etc/conf.d/tmicoind: config file for /etc/init.d/tmicoind
+
+# Config file location
+#TMICOIND_CONFIGFILE="/etc/tmicoin/tmicoincore.conf"
+
+# What directory to write pidfile to?  (created and owned by $TMICOIND_USER)
+#TMICOIND_PIDDIR="/var/run/tmicoind"
+
+# What filename to give the pidfile
+#TMICOIND_PIDFILE="${TMICOIND_PIDDIR}/tmicoind.pid"
+
+# Where to write tmicoind data (be mindful that the blockchain is large)
+#TMICOIND_DATADIR="/var/lib/tmicoind"
+
+# User and group to own tmicoind process
+#TMICOIND_USER="tmicoin"
+#TMICOIND_GROUP="tmicoin"
+
+# Path to tmicoind executable
+#TMICOIND_BIN="/usr/bin/tmicoind"
+
+# Nice value to run tmicoind under
+#TMICOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#TMICOIND_OPTS=""
+
+# The timeout in seconds OpenRC will wait for tmicoind to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+TMICOIND_SIGTERM_TIMEOUT=60

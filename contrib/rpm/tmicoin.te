@@ -1,0 +1,81 @@
+policy_module(tmicoin, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type tmicoin_t;
+type tmicoin_exec_t;
+init_daemon_domain(tmicoin_t, tmicoin_exec_t)
+
+permissive tmicoin_t;
+
+type tmicoin_initrc_exec_t;
+init_script_file(tmicoin_initrc_exec_t)
+
+type tmicoin_conf_t;
+files_type(tmicoin_conf_t)
+
+type tmicoin_var_lib_t;
+files_type(tmicoin_var_lib_t)
+
+type tmicoin_var_run_t;
+files_type(tmicoin_var_run_t)
+
+type tmicoin_port_t;
+corenet_port(tmicoin_port_t)
+
+########################################
+#
+# tmicoin local policy
+#
+allow tmicoin_t self:process { fork };
+
+allow tmicoin_t self:fifo_file rw_fifo_file_perms;
+allow tmicoin_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(tmicoin_t, tmicoin_conf_t, tmicoin_conf_t)
+manage_files_pattern(tmicoin_t, tmicoin_conf_t, tmicoin_conf_t)
+
+manage_dirs_pattern(tmicoin_t, tmicoin_var_lib_t, tmicoin_var_lib_t)
+manage_files_pattern(tmicoin_t, tmicoin_var_lib_t, tmicoin_var_lib_t)
+files_var_lib_filetrans(tmicoin_t, tmicoin_var_lib_t, { dir file })
+
+manage_dirs_pattern(tmicoin_t, tmicoin_var_run_t, tmicoin_var_run_t)
+manage_files_pattern(tmicoin_t, tmicoin_var_run_t, tmicoin_var_run_t)
+
+sysnet_dns_name_resolve(tmicoin_t)
+corenet_all_recvfrom_unlabeled(tmicoin_t)
+
+allow tmicoin_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(tmicoin_t)
+corenet_tcp_sendrecv_generic_node(tmicoin_t)
+corenet_tcp_sendrecv_all_ports(tmicoin_t)
+corenet_tcp_bind_generic_node(tmicoin_t)
+
+gen_require(`
+    type tmicoin_port_t;
+')
+allow tmicoin_t tmicoin_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type tmicoin_port_t;
+')
+allow tmicoin_t tmicoin_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(tmicoin_t)
+
+files_read_etc_files(tmicoin_t)
+
+miscfiles_read_localization(tmicoin_t)
+
+sysnet_dns_name_resolve(tmicoin_t)
+
+allow tmicoin_t tmicoin_exec_t:file execute_no_trans;
+allow tmicoin_t self:process setsched;
+corecmd_exec_ls(tmicoin_t)
+corenet_tcp_connect_http_port(tmicoin_t)
+dev_read_urand(tmicoin_t)
+fs_getattr_xattr_fs(tmicoin_t)
+kernel_read_system_state(tmicoin_t)
