@@ -55,7 +55,7 @@ extern const unsigned long& TRANSACTION_REQUEST_MINIMUM_UNIT;
 #define UPDATE_VERSION_MANAGEMENT_FILE_PREFIX ""        //테스트가 필요한 경우 이름 바꿔서 사용.
 #define UPDATE_RULE "0.1.1.0"
 #define DEFAULT_UPDATE_CHECK_INTERVAL_SECOND 60 * 60    // 1시간
-#define UPDATE_SITE_ADDRESS "https://wallet-version." TEXT_tmi ".io/app/update/" //wallet-version.tmi.io
+#define UPDATE_SITE_ADDRESS "https://wallet-version." TEXT_tmi ".io/app/update/" //wallet-version.tmikor.io
 #define UPDATE_VERSION_MANAGEMENT_FILE UPDATE_VERSION_MANAGEMENT_FILE_PREFIX TEXT_tmi "coin-qt.version.xml"
 
 

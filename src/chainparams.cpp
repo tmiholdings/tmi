@@ -207,9 +207,9 @@ public:
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
 
-		//vSeeds.emplace_back("mainnet01.tmi.io", false);
-		//vSeeds.emplace_back("mainnet02.tmi.io", false);
-		//vSeeds.emplace_back("mainnet03.tmi.io", false);
+		//vSeeds.emplace_back("mainnet01.tmikor.io", false);
+		//vSeeds.emplace_back("mainnet02.tmikor.io", false);
+		//vSeeds.emplace_back("mainnet03.tmikor.io", false);
         DNS_SEED_MAINNET;
 
 		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, PUBKEY_ADDRESS_MAINNET);  // prefix: w
@@ -357,9 +357,9 @@ public:
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
 
-		//vSeeds.emplace_back("testnet01.tmi.io", false);
-		//vSeeds.emplace_back("testnet02.tmi.io", false);
-		//vSeeds.emplace_back("testnet03.tmi.io", false);
+		//vSeeds.emplace_back("testnet01.tmikor.io", false);
+		//vSeeds.emplace_back("testnet02.tmikor.io", false);
+		//vSeeds.emplace_back("testnet03.tmikor.io", false);
         DNS_SEED_TESTNET;
 
 		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, PUBKEY_ADDRESS_TESTNET);  // prefix: t

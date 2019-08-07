@@ -17,7 +17,7 @@ from data responsibility and improves real-time processing.
 
 ## Links
 
-* White paper: [English](https://tmi.io/pdf/TMI_WHITEPAPER.pdf), [日本語](https://tmi.io/pdf/TMI_WHITEPAPER_JA.pdf), [Русский](https://tmi.io/pdf/TMI_WHITEPAPER_RU.pdf), [中文 (中国)](https://tmi.io/pdf/TMI_WHITEPAPER_ZH.pdf), [한국어](https://tmi.io/pdf/TMI_WHITEPAPER_KO.pdf)
-* Web Wallet: https://wallet.tmi.io
-* MAINNET Explorer: https://explorer.tmi.io
-* TESTNET Explorer: https://testnet-explorer.tmi.io
+* White paper: [English](http://tmikor.com/wp-content/uploads/2019/06/TMI-WhitepaperEnglish.pdf), [한국어](http://tmikor.com/wp-content/uploads/2019/07/TMI백서암호화폐-결제모듈-사업화.pdf)
+* Web Wallet: https://wallet.tmikor.io
+* MAINNET Explorer: https://explorer.tmikor.io
+* TESTNET Explorer: https://testnet-explorer.tmikor.io
